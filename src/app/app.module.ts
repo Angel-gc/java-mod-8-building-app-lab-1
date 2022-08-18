@@ -10,6 +10,7 @@ import { ConversationThreadComponentComponent } from './conversation-thread-comp
 import { AppContactComponentComponent } from './app-contact-component/app-contact-component.component';
 import { SenderMessageComponentComponent } from './sender-message-component/sender-message-component.component';
 import { UserMessageComponentComponent } from './user-message-component/user-message-component.component';
+import { WelcomeHeaderComponentComponent } from './welcome-header-component/welcome-header-component.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UserMessageComponentComponent } from './user-message-component/user-mes
     ConversationThreadComponentComponent,
     AppContactComponentComponent,
     SenderMessageComponentComponent,
-    UserMessageComponentComponent
+    UserMessageComponentComponent,
+    WelcomeHeaderComponentComponent
   ],
   imports: [
     BrowserModule
