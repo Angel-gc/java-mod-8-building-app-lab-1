@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Conversation } from '../converstion.model';
 
 @Component({
   selector: 'app-app-conversion-control-component',
@@ -7,6 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppConversionControlComponentComponent implements OnInit {
 
+  conversations: Conversation[] = [
+    {
+      id: 1,
+      users: [
+        { firstName: "Claire" },
+        { firstName: "Ludovic" },
+        { firstName: "Jessica" },
+      ],
+    },
+    {
+      id: 2,
+      users: [{ firstName: "Claire" }, { firstName: "James" }],
+    },
+    {
+      id: 3,
+      users: [
+        { firstName: "Claire" },
+        { firstName: "Aurelie" },
+        { firstName: "James" },
+        { firstName: "Jessica" },
+      ],
+    },
+  ];
   constructor() { }
 
   ngOnInit(): void {

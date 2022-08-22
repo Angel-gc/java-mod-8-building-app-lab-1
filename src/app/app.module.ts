@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { AppConversionControlComponentComponent } from './app-conversion-control-component/app-conversion-control-component.component';
@@ -11,6 +12,7 @@ import { AppContactComponentComponent } from './app-contact-component/app-contac
 import { SenderMessageComponentComponent } from './sender-message-component/sender-message-component.component';
 import { UserMessageComponentComponent } from './user-message-component/user-message-component.component';
 import { WelcomeHeaderComponentComponent } from './welcome-header-component/welcome-header-component.component';
+import { HighlightDirective } from './highlight.directive';
 
 @NgModule({
   declarations: [
@@ -23,10 +25,12 @@ import { WelcomeHeaderComponentComponent } from './welcome-header-component/welc
     AppContactComponentComponent,
     SenderMessageComponentComponent,
     UserMessageComponentComponent,
-    WelcomeHeaderComponentComponent
+    WelcomeHeaderComponentComponent,
+    HighlightDirective
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
