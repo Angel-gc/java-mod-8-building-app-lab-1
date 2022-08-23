@@ -1,7 +1,7 @@
 import { LoggingService } from './../logging.service';
 import { Component, OnInit } from '@angular/core';
-import { MessagingDataService } from '../messaging-data.service';
 import { Message } from '../message.model';
+import { MessagingDataService } from '../messaging-data.service';
 
 @Component({
   selector: 'app-send-message-component',
@@ -10,25 +10,36 @@ import { Message } from '../message.model';
 })
 export class SendMessageComponentComponent implements OnInit {
 
-  // log = new LoggingService
-  messageString: Message =
-  {
-    sender: { firstName: "Jessica" },
-    text: "Message from Jessica",
-    conversationId: 1,
-    sequenceNumber: 1,
-  }
+  messageString: string;
   
-  constructor(private log: LoggingService, private msgSer: MessagingDataService) {
-  
-   }
+  constructor(private log: LoggingService, private msgSer: MessagingDataService) { }
 
   ngOnInit(): void {
   }
 
   onSendMessage(){
     this.log.log('send following message: ')
-    this.log.log(this.messageString.text)
-    this.msgSer.addUserMessage(this.messageString)
+    this.log.log(this.messageString)
   }
+
+  // messageString: Message =
+  // {
+  //   sender: { firstName: "Jessica" },
+  //   text: "Message from Jessica",
+  //   conversationId: 1,
+  //   sequenceNumber: 1,
+  // }
+  
+  // constructor(private log: LoggingService, private msgSer: MessagingDataService) {
+  
+  //  }
+
+  // ngOnInit(): void {
+  // }
+
+  // onSendMessage(){
+  //   this.log.log('send following message: ')
+  //   this.log.log(this.messageString.text)
+  //   this.msgSer.addUserMessage(this.messageString)
+  // }
 }

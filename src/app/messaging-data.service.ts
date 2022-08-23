@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
 import { LoggingService } from './logging.service';
 import { Message } from './message.model';
@@ -21,12 +22,12 @@ export class MessagingDataService {
   ];
 
   private userMessages: Message[] = [
-    {
-      sender: { firstName: "Aurelie" },
-      text: "Message from Aurelie",
-      conversationId: 1,
-      sequenceNumber: 2,
-    },
+    // {
+    //   sender: { firstName: "Aurelie" },
+    //   text: "Message from Aurelie",
+    //   conversationId: 1,
+    //   sequenceNumber: 2,
+    // },
   ];
   userMessagesChanged = new EventEmitter<Message[]>();
   senderMessagesChanged = new EventEmitter<Message[]>();
@@ -36,18 +37,26 @@ export class MessagingDataService {
   }
 
   getUserMessages() {
-    return this.userMessages.slice();
+    this.http.get<Message[]>("http://localhost:8080/api/get-user-messages").subscribe(
+            (messages: Message[]) => {
+                console.log("Response Messages: ", messages);
+                this.userMessages = messages;
+                this.userMessagesChanged.emit(this.userMessages);
+            }
+        )
+        return this.userMessages.slice();
   }
   addUserMessage(newMessage: Message) {
     this.userMessages.push(newMessage);
     this.userMessagesChanged.emit(this.userMessages.slice());
   }
+
   addSenderMessage(newMessage: Message) {
     this.senderMessages.push(newMessage);
     this.senderMessagesChanged.emit(this.senderMessages.slice());
   }
 
-  constructor(private log: LoggingService) {
+  constructor(private log: LoggingService, private http: HttpClient) {
     log.log("Messaging Data Service constructor completed");
   }
 }

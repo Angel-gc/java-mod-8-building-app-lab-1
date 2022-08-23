@@ -1,5 +1,3 @@
-import { MessagingDataService } from './messaging-data.service';
-import { LoggingService } from './logging.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from "@angular/forms";
@@ -15,6 +13,10 @@ import { SenderMessageComponentComponent } from './sender-message-component/send
 import { UserMessageComponentComponent } from './user-message-component/user-message-component.component';
 import { WelcomeHeaderComponentComponent } from './welcome-header-component/welcome-header-component.component';
 import { HighlightDirective } from './highlight.directive';
+import { HttpClientModule } from "@angular/common/http";
+import { MessagingDataService } from './messaging-data.service';
+import { LoggingService } from './logging.service';
+import { ActiveUserMessagesComponent } from './active-user-messages/active-user-messages.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +30,15 @@ import { HighlightDirective } from './highlight.directive';
     SenderMessageComponentComponent,
     UserMessageComponentComponent,
     WelcomeHeaderComponentComponent,
-    HighlightDirective
+    HighlightDirective,
+    ActiveUserMessagesComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule
   ],
   providers: [LoggingService, MessagingDataService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
