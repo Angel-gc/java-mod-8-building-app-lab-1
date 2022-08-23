@@ -32,7 +32,17 @@ export class MessagingDataService {
   userMessagesChanged = new EventEmitter<Message[]>();
   senderMessagesChanged = new EventEmitter<Message[]>();
 
+  // getSenderMessages() {
+  //   return this.senderMessages.slice();
+  // }
   getSenderMessages() {
+    this.http
+      .get<Message[]>("http://localhost:8080/api/get-sender-messages")
+      .subscribe((messages: Message[]) => {
+        console.log(messages);
+        this.senderMessages = messages;
+        this.senderMessagesChanged.emit(this.senderMessages);
+      });
     return this.senderMessages.slice();
   }
 
