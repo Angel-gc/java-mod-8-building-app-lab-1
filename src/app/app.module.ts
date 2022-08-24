@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from "@angular/forms";
+import { RouterModule, Routes } from "@angular/router";
+
 
 import { AppComponent } from './app.component';
 import { AppConversionControlComponentComponent } from './app-conversion-control-component/app-conversion-control-component.component';
@@ -17,6 +19,12 @@ import { HttpClientModule } from "@angular/common/http";
 import { MessagingDataService } from './messaging-data.service';
 import { LoggingService } from './logging.service';
 import { ActiveUserMessagesComponent } from './active-user-messages/active-user-messages.component';
+import { ApplicationComponent } from './application/application.component';
+
+const appRoutes: Routes = [
+  { path: "", component: ApplicationComponent },
+  { path: "contactList", component: AppContactListComponentComponent },
+];
 
 @NgModule({
   declarations: [
@@ -31,12 +39,14 @@ import { ActiveUserMessagesComponent } from './active-user-messages/active-user-
     UserMessageComponentComponent,
     WelcomeHeaderComponentComponent,
     HighlightDirective,
-    ActiveUserMessagesComponent
+    ActiveUserMessagesComponent,
+    ApplicationComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [LoggingService, MessagingDataService],
   bootstrap: [AppComponent],

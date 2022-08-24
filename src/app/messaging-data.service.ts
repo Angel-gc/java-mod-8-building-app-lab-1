@@ -7,18 +7,18 @@ import { Message } from './message.model';
 export class MessagingDataService {
 
   private senderMessages: Message[] = [
-    {
-      sender: { firstName: "Ludovic", isOnline: true },
-      text: "Message from Ludovic",
-      conversationId: 1,
-      sequenceNumber: 0,
-    },
-    {
-      sender: { firstName: "Jessica" },
-      text: "Message from Jessica",
-      conversationId: 1,
-      sequenceNumber: 1,
-    },
+    // {
+    //   sender: { firstName: "Ludovic", isOnline: true },
+    //   text: "Message from Ludovic",
+    //   conversationId: 1,
+    //   sequenceNumber: 0,
+    // },
+    // {
+    //   sender: { firstName: "Jessica" },
+    //   text: "Message from Jessica",
+    //   conversationId: 1,
+    //   sequenceNumber: 1,
+    // },
   ];
 
   private userMessages: Message[] = [
@@ -39,7 +39,7 @@ export class MessagingDataService {
     this.http
       .get<Message[]>("http://localhost:8080/api/get-sender-messages")
       .subscribe((messages: Message[]) => {
-        console.log(messages);
+        console.log('SENDER MESSAGES', messages);
         this.senderMessages = messages;
         this.senderMessagesChanged.emit(this.senderMessages);
       });
@@ -56,10 +56,22 @@ export class MessagingDataService {
         )
         return this.userMessages.slice();
   }
+
   addUserMessage(newMessage: Message) {
+    this.http.post<Message[]>("http://localhost:8080/api/add-user-message", newMessage).subscribe(
+        (messages: Message[]) => {
+            console.log('POSTED MESSAGES', messages);
+            this.userMessages = messages;
+            this.userMessagesChanged.emit(this.userMessages);
+        }
+    )
     this.userMessages.push(newMessage);
     this.userMessagesChanged.emit(this.userMessages.slice());
   }
+  // addUserMessage(newMessage: Message) {
+  //   this.userMessages.push(newMessage);
+  //   this.userMessagesChanged.emit(this.userMessages.slice());
+  // }
 
   addSenderMessage(newMessage: Message) {
     this.senderMessages.push(newMessage);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Conversation } from '../converstion.model';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-app-conversion-control-component',
@@ -31,7 +32,11 @@ export class AppConversionControlComponentComponent implements OnInit {
       ],
     },
   ];
-  constructor() { }
+
+  onNewMessage() {
+    this.router.navigate(['contactList']);
+  }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
