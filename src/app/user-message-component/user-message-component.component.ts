@@ -1,5 +1,7 @@
+import { MessagingDataService } from './../messaging-data.service';
 import { Message } from './../message.model';
 import { Component, Input, OnInit } from "@angular/core";
+import { User } from '../user.model';
 
 @Component({
   selector: "app-user-message-component",
@@ -7,14 +9,14 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./user-message-component.component.css"],
 })
 export class UserMessageComponentComponent implements OnInit {
-  @Input() message: Message = {
-    sender: { firstName: "Ludovic" },
-    text: "Message from Ludovic",
-    conversationId: 1,
-    sequenceNumber: 0,
-  };
+  @Input() 
+  message: Message 
+  id: number;
 
-  constructor() {}
+  onDelete(){
+    this.msgSer.deleteUserMessage(this.message)
+  }
+  constructor(private msgSer: MessagingDataService) {}
 
   ngOnInit(): void {}
 }

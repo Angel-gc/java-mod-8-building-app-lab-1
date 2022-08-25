@@ -2,6 +2,7 @@ import { LoggingService } from './../logging.service';
 import { Component, OnInit } from '@angular/core';
 import { Message } from '../message.model';
 import { MessagingDataService } from '../messaging-data.service';
+import { User } from '../user.model';
 
 @Component({
   selector: 'app-send-message-component',
@@ -20,26 +21,12 @@ export class SendMessageComponentComponent implements OnInit {
   onSendMessage(){
     this.log.log('send following message: ')
     this.log.log(this.messageString)
+
+    this.msgSer.addUserMessage({
+      sender: new User("Angel", true),
+      text: this.messageString,
+      conversationId: 5,
+      sequenceNumber: 5
+    });
   }
-
-  // messageString: Message =
-  // {
-  //   sender: { firstName: "Jessica" },
-  //   text: "Message from Jessica",
-  //   conversationId: 1,
-  //   sequenceNumber: 1,
-  // }
-  
-  // constructor(private log: LoggingService, private msgSer: MessagingDataService) {
-  
-  //  }
-
-  // ngOnInit(): void {
-  // }
-
-  // onSendMessage(){
-  //   this.log.log('send following message: ')
-  //   this.log.log(this.messageString.text)
-  //   this.msgSer.addUserMessage(this.messageString)
-  // }
 }

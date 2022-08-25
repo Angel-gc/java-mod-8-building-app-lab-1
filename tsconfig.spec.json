@@ -2,6 +2,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    // "isolatedModules": false,
+
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine"
@@ -13,6 +15,7 @@
   ],
   "include": [
     "src/**/*.spec.ts",
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    // "../node_modules/cypress"
   ]
 }
