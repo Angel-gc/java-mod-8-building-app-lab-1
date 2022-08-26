@@ -13,7 +13,7 @@ export class UserMessageComponentComponent implements OnInit {
   //conversation thread component
   @Input() 
   message: Message 
-  id: number;
+  // id: number;
 
   onDelete(){
     this.msgSer.deleteUserMessage(this.message)

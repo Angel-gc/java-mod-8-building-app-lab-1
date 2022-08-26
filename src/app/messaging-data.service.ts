@@ -8,30 +8,16 @@ import { Message } from './message.model';
 export class MessagingDataService {
 
   private senderMessages: Message[] = [
-    // {
-    //   sender: { firstName: "Ludovic", isOnline: true },
-    //   text: "Message from Ludovic",
-    //   conversationId: 1,
-    //   sequenceNumber: 0,
-    // },
-    // {
-    //   sender: { firstName: "Jessica" },
-    //   text: "Message from Jessica",
-    //   conversationId: 1,
-    //   sequenceNumber: 1,
-    // },
+
   ];
   conversationId: string;
   sequenceNumber: string;
 
   private userMessages: Message[] = [
-    // {
-    //   sender: { firstName: "Aurelie" },
-    //   text: "Message from Aurelie",
-    //   conversationId: 1,
-    //   sequenceNumber: 2,
-    // },
+
   ];
+  //event emitters which we call within our http requests to let listeners know when a
+  //change has occured
   userMessagesChanged = new EventEmitter<Message[]>();
   senderMessagesChanged = new EventEmitter<Message[]>();
 
@@ -62,13 +48,19 @@ export class MessagingDataService {
 
   deleteUserMessage(messageToDelete: Message) {
     this.http.delete<Message[]>(`http://localhost:8080/api/delete-user-message/${messageToDelete.conversationId}/${messageToDelete.sequenceNumber}`).subscribe(
-        (messages: Message[]) => {
-            console.log('Remaining Messages', messages);
-            this.userMessages = messages;
-            this.userMessagesChanged.emit(this.userMessages);
-        }
+      //nothing is returned from the backend delete mapping therefore we dont have anything
+      //to manipulate within the callback
+        // (messages: Message[]) => {
+        //   this.userMessages = messages;
+        //   this.userMessagesChanged.emit(this.userMessages);
+        //   console.log('Remaining Messages', messages);
+        // }
     )
-    this.userMessages = this.userMessages.filter((message) => message.sequenceNumber !== messageToDelete.sequenceNumber);
+    this.userMessages = this.userMessages.filter((message) => 
+    (message.sequenceNumber !== messageToDelete.sequenceNumber) && 
+    (message.conversationId !== messageToDelete.conversationId)
+    );
+    console.log('Remaining Messages', this.userMessages);
     this.userMessagesChanged.emit(this.userMessages.slice());
   }
 

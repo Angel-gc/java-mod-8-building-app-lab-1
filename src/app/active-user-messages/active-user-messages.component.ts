@@ -13,9 +13,10 @@ export class ActiveUserMessagesComponent implements OnInit {
   constructor(private msgSer: MessagingDataService) { }
 
   ngOnInit(): void {
-    this.msgSer.userMessagesChanged.subscribe((messages: Message[]) => {
-      this.sentMsgCt = messages.length;
-    });
+    // this.msgSer.userMessagesChanged.subscribe((messages: Message[]) => {
+    //   if (messages.length !== null){
+    //   this.sentMsgCt = messages.length;
+    //   }
+    // });
   }
-
 }
